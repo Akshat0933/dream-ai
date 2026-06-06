@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { dbConnect } from "@/lib/mongodb";
+import { dbConnect, hasMongoConnectionString } from "@/lib/mongodb";
 import { parseSessionToken } from "@/lib/auth";
 import ImageCache from "@/models/ImageCache";
 import QuizResult from "@/models/QuizResult";
@@ -256,7 +256,11 @@ async function generateImage(prompt, token) {
 // ---- API handler ----
 export async function POST(request) {
   try {
-    await dbConnect();
+    const hasMongo = hasMongoConnectionString();
+    if (hasMongo) {
+      await dbConnect();
+    }
+
     const { answers, email: inputEmail } = await request.json();
     const token = process.env.HUGGINGFACE_API_TOKEN;
 
@@ -316,26 +320,30 @@ export async function POST(request) {
     const promises = rooms.map(async (room) => {
       const fullPrompt = promptMap[room];
       const cacheKey = crypto.createHash("md5").update(fullPrompt).digest("hex");
-      
-      try {
-        const cached = await ImageCache.findOne({ key: cacheKey });
-        if (cached?.base64) {
-          images[room] = cached.base64;
-          return;
+
+      if (hasMongo) {
+        try {
+          const cached = await ImageCache.findOne({ key: cacheKey });
+          if (cached?.base64) {
+            images[room] = cached.base64;
+            return;
+          }
+        } catch (cacheErr) {
+          console.error("Cache read error:", cacheErr);
         }
-      } catch (cacheErr) {
-        console.error("Cache read error:", cacheErr);
       }
 
       if (token && token !== "your_token_here") {
         const img = await generateImage(fullPrompt, token);
         if (img) {
           images[room] = img;
-          
-          try {
-            await ImageCache.create({ key: cacheKey, base64: img });
-          } catch (cacheSaveErr) {
-            console.error("Cache save error:", cacheSaveErr);
+
+          if (hasMongo) {
+            try {
+              await ImageCache.create({ key: cacheKey, base64: img });
+            } catch (cacheSaveErr) {
+              console.error("Cache save error:", cacheSaveErr);
+            }
           }
         }
       }
@@ -343,22 +351,25 @@ export async function POST(request) {
 
     await Promise.all(promises);
 
-    const quizResult = await QuizResult.create({
-      userId,
-      answers,
-      personality: {
-        name: personality.name,
-        tagline: personality.tagline,
-        description: personality.description,
-        traits: personality.traits,
-        color: personality.color,
-      },
-      images,
-      email: inputEmail || "",
-    });
+    let quizResult = null;
+    if (hasMongo) {
+      quizResult = await QuizResult.create({
+        userId,
+        answers,
+        personality: {
+          name: personality.name,
+          tagline: personality.tagline,
+          description: personality.description,
+          traits: personality.traits,
+          color: personality.color,
+        },
+        images,
+        email: inputEmail || "",
+      });
+    }
 
     return NextResponse.json({
-      id: quizResult._id,
+      id: quizResult?._id || "",
       personality: {
         name: personality.name,
         tagline: personality.tagline,

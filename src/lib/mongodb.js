@@ -6,6 +6,10 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null };
 }
 
+export function hasMongoConnectionString() {
+  return Boolean(process.env.MONGODB_URI);
+}
+
 export async function dbConnect() {
   const MONGODB_URI = process.env.MONGODB_URI;
 

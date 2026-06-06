@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 
-import { dbConnect } from "@/lib/mongodb";
+import { dbConnect, hasMongoConnectionString } from "@/lib/mongodb";
 import QuizResult from "@/models/QuizResult";
 import Results from "@/components/Results";
 import { notFound } from "next/navigation";
@@ -8,7 +8,7 @@ import { notFound } from "next/navigation";
 export default async function ResultPage({ params }) {
   const { id } = await params;
 
-  if (!process.env.MONGODB_URI) {
+  if (!hasMongoConnectionString()) {
     return notFound();
   }
 

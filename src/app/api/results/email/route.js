@@ -1,9 +1,13 @@
 import { NextResponse } from "next/server";
-import { dbConnect } from "@/lib/mongodb";
+import { dbConnect, hasMongoConnectionString } from "@/lib/mongodb";
 import QuizResult from "@/models/QuizResult";
 
 export async function POST(request) {
   try {
+    if (!hasMongoConnectionString()) {
+      return NextResponse.json({ success: true, skipped: true });
+    }
+
     await dbConnect();
     const { id, email } = await request.json();
 

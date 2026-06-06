@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { dbConnect } from "@/lib/mongodb";
+import { dbConnect, hasMongoConnectionString } from "@/lib/mongodb";
 import { parseSessionToken } from "@/lib/auth";
 import QuizResult from "@/models/QuizResult";
 import Link from "next/link";
@@ -18,6 +18,10 @@ export default async function DashboardPage() {
 
   const payload = parseSessionToken(sessionCookie);
   if (!payload || !payload.userId) {
+    redirect("/");
+  }
+
+  if (!hasMongoConnectionString()) {
     redirect("/");
   }
 

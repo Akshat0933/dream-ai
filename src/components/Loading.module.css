@@ -1,0 +1,165 @@
+.wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px;
+  max-width: 480px;
+  animation: fadeIn 0.5s ease both;
+}
+
+/* ---- orb ---- */
+.orb {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.orbCore {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--gradient);
+  background-size: 200% auto;
+  animation: shiftGradient 3s ease infinite, orbPulse 3s ease-in-out infinite;
+}
+
+.ring1,
+.ring2 {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid transparent;
+  animation: spin linear infinite;
+}
+
+.ring1 {
+  width: 72px;
+  height: 72px;
+  border-top-color: rgba(108, 92, 231, 0.4);
+  animation-duration: 2.5s;
+}
+
+.ring2 {
+  width: 96px;
+  height: 96px;
+  border-bottom-color: rgba(253, 121, 168, 0.2);
+  animation-duration: 4s;
+  animation-direction: reverse;
+}
+
+/* ---- title ---- */
+.title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 36px;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: shiftGradient 4s ease infinite;
+}
+
+/* ---- steps ---- */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  border-radius: var(--radius);
+  transition: all 0.3s var(--ease);
+  font-size: 0.9rem;
+}
+
+.step.active {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-focus);
+  animation: fadeUp 0.35s ease both;
+}
+
+.step.done {
+  opacity: 0.45;
+}
+
+.step.waiting {
+  opacity: 0.2;
+}
+
+.stepIcon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.step.done .stepIcon {
+  color: var(--green);
+}
+
+.stepDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: block;
+}
+
+.stepLabel {
+  flex: 1;
+  text-align: left;
+  color: var(--text-dim);
+}
+
+.step.active .stepLabel {
+  color: var(--text);
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+/* ---- mobile ---- */
+@media (max-width: 640px) {
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .step {
+    padding: 10px 14px;
+    font-size: 0.84rem;
+  }
+}

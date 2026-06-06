@@ -10,6 +10,10 @@ export async function dbConnect() {
   const MONGODB_URI = process.env.MONGODB_URI;
 
   if (!MONGODB_URI) {
+    if (process.env.NEXT_PHASE === "phase-production-build" || process.env.NODE_ENV === "production") {
+      console.warn("MONGODB_URI is not defined. Database operations will be disabled.");
+      return null;
+    }
     throw new Error("Please define the MONGODB_URI environment variable in .env.local");
   }
 

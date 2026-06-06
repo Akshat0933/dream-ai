@@ -5,29 +5,29 @@ import styles from "./Results.module.css";
 
 const LISTINGS = {
   modern: [
-    { id: 1, title: "Modern Loft in Downtown LA",       price: "$1,250,000", beds: 2, baths: 2, sqft: "1,800", tag: "Smart Home" },
-    { id: 2, title: "Sleek Penthouse with Skyline Views",price: "$2,100,000", beds: 3, baths: 3, sqft: "2,400", tag: "City Living" },
-    { id: 3, title: "Contemporary Condo in Silver Lake", price: "$890,000",   beds: 2, baths: 1, sqft: "1,200", tag: "Walkable" },
+    { id: 1, title: "Modern Loft in Downtown LA",        price: "$1,250,000", beds: 2, baths: 2, sqft: "1,800", tag: "Smart Home",   url: "https://www.snaphomz.com/buy/browse?q=Los+Angeles%2C+CA&bedRooms=2&priceMax=1500000" },
+    { id: 2, title: "Sleek Penthouse in San Francisco",  price: "$2,100,000", beds: 3, baths: 3, sqft: "2,400", tag: "City Living",  url: "https://www.snaphomz.com/buy/browse?q=San+Francisco%2C+CA&bedRooms=3&priceMax=2500000" },
+    { id: 3, title: "Contemporary Condo in Silver Lake",  price: "$890,000",   beds: 2, baths: 1, sqft: "1,200", tag: "Walkable",    url: "https://www.snaphomz.com/buy/browse?q=Silver+Lake%2C+Los+Angeles%2C+CA&bedRooms=2&priceMax=1000000" },
   ],
   cozy: [
-    { id: 4, title: "Charming Craftsman in Pasadena",    price: "$980,000",   beds: 3, baths: 2, sqft: "2,100", tag: "Character Home" },
-    { id: 5, title: "Restored Victorian in Eagle Rock",  price: "$1,150,000", beds: 4, baths: 2, sqft: "2,600", tag: "Historic" },
-    { id: 6, title: "Cozy Bungalow in Altadena",         price: "$750,000",   beds: 2, baths: 1, sqft: "1,400", tag: "Garden" },
+    { id: 4, title: "Charming Craftsman in Pasadena",     price: "$980,000",   beds: 3, baths: 2, sqft: "2,100", tag: "Character Home", url: "https://www.snaphomz.com/buy/browse?q=Pasadena%2C+CA&bedRooms=3&priceMax=1200000" },
+    { id: 5, title: "Restored Victorian in Eagle Rock",   price: "$1,150,000", beds: 4, baths: 2, sqft: "2,600", tag: "Historic",    url: "https://www.snaphomz.com/buy/browse?q=Eagle+Rock%2C+Los+Angeles%2C+CA&bedRooms=4&priceMax=1300000" },
+    { id: 6, title: "Cozy Bungalow in Altadena",          price: "$750,000",   beds: 2, baths: 1, sqft: "1,400", tag: "Garden",      url: "https://www.snaphomz.com/buy/browse?q=Altadena%2C+CA&bedRooms=2&priceMax=900000" },
   ],
   luxe: [
-    { id: 7, title: "Luxury Estate in Beverly Hills",   price: "$8,500,000", beds: 6, baths: 8, sqft: "9,200", tag: "Estate" },
-    { id: 8, title: "Malibu Oceanfront Villa",           price: "$5,200,000", beds: 4, baths: 5, sqft: "4,800", tag: "Ocean View" },
-    { id: 9, title: "Bel Air Modern Masterpiece",        price: "$12,000,000",beds: 7, baths: 9, sqft: "12,000",tag: "Luxury" },
+    { id: 7, title: "Luxury Estate in Beverly Hills",    price: "$8,500,000", beds: 6, baths: 8, sqft: "9,200", tag: "Estate",      url: "https://www.snaphomz.com/buy/browse?q=Beverly+Hills%2C+CA&bedRooms=5&priceMax=10000000" },
+    { id: 8, title: "Malibu Oceanfront Villa",            price: "$5,200,000", beds: 4, baths: 5, sqft: "4,800", tag: "Ocean View",  url: "https://www.snaphomz.com/buy/browse?q=Malibu%2C+CA&bedRooms=4&priceMax=6000000" },
+    { id: 9, title: "Bel Air Modern Masterpiece",         price: "$12,000,000",beds: 7, baths: 9, sqft: "12,000",tag: "Luxury",      url: "https://www.snaphomz.com/buy/browse?q=Bel+Air%2C+Los+Angeles%2C+CA&bedRooms=6&priceMax=15000000" },
   ],
   nature: [
-    { id: 10, title: "Eco Home in Topanga Canyon",       price: "$1,450,000", beds: 3, baths: 2, sqft: "2,200", tag: "Sustainable" },
-    { id: 11, title: "Hillside Retreat in Laurel Canyon", price: "$1,800,000", beds: 3, baths: 3, sqft: "2,800", tag: "Nature" },
-    { id: 12, title: "Garden Oasis in South Pasadena",    price: "$1,100,000", beds: 4, baths: 2, sqft: "2,400", tag: "Garden" },
+    { id: 10, title: "Eco Home in Topanga Canyon",        price: "$1,450,000", beds: 3, baths: 2, sqft: "2,200", tag: "Sustainable", url: "https://www.snaphomz.com/buy/browse?q=Topanga%2C+CA&bedRooms=3&priceMax=1800000" },
+    { id: 11, title: "Hillside Retreat in Laurel Canyon",  price: "$1,800,000", beds: 3, baths: 3, sqft: "2,800", tag: "Nature",     url: "https://www.snaphomz.com/buy/browse?q=Laurel+Canyon%2C+Los+Angeles%2C+CA&bedRooms=3&priceMax=2000000" },
+    { id: 12, title: "Garden Oasis in South Pasadena",     price: "$1,100,000", beds: 4, baths: 2, sqft: "2,400", tag: "Garden",     url: "https://www.snaphomz.com/buy/browse?q=South+Pasadena%2C+CA&bedRooms=4&priceMax=1300000" },
   ],
   creative: [
-    { id: 13, title: "Artist Loft in Arts District",     price: "$920,000",   beds: 2, baths: 2, sqft: "1,600", tag: "Studio" },
-    { id: 14, title: "Converted Warehouse in DTLA",      price: "$1,350,000", beds: 2, baths: 2, sqft: "2,100", tag: "Industrial" },
-    { id: 15, title: "Colorful Cottage in Venice",       price: "$1,650,000", beds: 3, baths: 2, sqft: "1,800", tag: "Eclectic" },
+    { id: 13, title: "Artist Loft in Arts District",      price: "$920,000",   beds: 2, baths: 2, sqft: "1,600", tag: "Studio",      url: "https://www.snaphomz.com/buy/browse?q=Arts+District%2C+Los+Angeles%2C+CA&bedRooms=2&priceMax=1100000" },
+    { id: 14, title: "Converted Warehouse in DTLA",       price: "$1,350,000", beds: 2, baths: 2, sqft: "2,100", tag: "Industrial",  url: "https://www.snaphomz.com/buy/browse?q=Downtown+Los+Angeles%2C+CA&bedRooms=2&priceMax=1500000" },
+    { id: 15, title: "Colorful Cottage in Venice",        price: "$1,650,000", beds: 3, baths: 2, sqft: "1,800", tag: "Eclectic",    url: "https://www.snaphomz.com/buy/browse?q=Venice%2C+Los+Angeles%2C+CA&bedRooms=3&priceMax=1800000" },
   ],
 };
 
@@ -263,7 +263,7 @@ export default function Results({ personality, images, answers = {}, onRestart, 
                   <button
                     id={`listing-${l.id}`}
                     className={styles.listingBtn}
-                    onClick={() => window.open("https://snaphomz.com/listings", "_blank")}
+                    onClick={() => window.open(l.url || "https://www.snaphomz.com/buy/browse", "_blank")}
                   >
                     View Details
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -290,7 +290,7 @@ export default function Results({ personality, images, answers = {}, onRestart, 
               <button
                 id="explore-btn"
                 className="btn-ghost"
-                onClick={() => window.open("https://snaphomz.com/listings", "_blank")}
+                onClick={() => window.open("https://www.snaphomz.com/buy/browse", "_blank")}
               >
                 Explore More Homes
               </button>

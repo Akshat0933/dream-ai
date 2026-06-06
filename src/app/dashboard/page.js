@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { dbConnect } from "@/lib/mongodb";
@@ -7,8 +9,6 @@ import Link from "next/link";
 import styles from "./dashboard.module.css";
 
 export default async function DashboardPage() {
-  await dbConnect();
-
   const cookieStore = await cookies();
   const sessionCookie = cookieStore.get("session")?.value;
 
@@ -20,6 +20,8 @@ export default async function DashboardPage() {
   if (!payload || !payload.userId) {
     redirect("/");
   }
+
+  await dbConnect();
 
   const results = await QuizResult.find({ userId: payload.userId })
     .sort({ createdAt: -1 })

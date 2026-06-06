@@ -1,12 +1,23 @@
+export const dynamic = 'force-dynamic';
+
 import { dbConnect } from "@/lib/mongodb";
 import QuizResult from "@/models/QuizResult";
 import Results from "@/components/Results";
 import { notFound } from "next/navigation";
 
 export default async function ResultPage({ params }) {
-  await dbConnect();
-
   const { id } = await params;
+
+  if (!process.env.MONGODB_URI) {
+    return notFound();
+  }
+
+  try {
+    await dbConnect();
+  } catch (err) {
+    console.error("Failed to connect to database:", err);
+    return notFound();
+  }
 
   let resultDoc;
   try {

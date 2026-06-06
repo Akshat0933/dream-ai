@@ -2,7 +2,7 @@
 
 **Lifestyle-to-listing conversion engine via generative home visuals.**
 
-> Built in 1 hour · Next.js 16 · Hugging Face FLUX.1-schnell · MongoDB · Vanilla CSS
+> Next.js 16 · Hugging Face FLUX.1-schnell · MongoDB · Vanilla CSS
 
 🔗 **Live Demo**: [dream-ai.vercel.app](https://dream-ai.vercel.app) *(update after deploy)*
 
